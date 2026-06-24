@@ -1,3 +1,4 @@
+-- 1x
 type ConfigType__DARKLUA_TYPE_a={
 Object:Instance,
 Camera:Instance?,
@@ -136,7 +137,7 @@ SliceScale=1,
 ThemeTag=h and h.ThemeTag or nil,
 BackgroundTransparency=1,
 },i)
-for u,v in pairsh do
+for u,v in pairs(h) do
 if not table.find({"ThemeTag"},u)then
 r[u]=v
 end
@@ -298,20 +299,20 @@ function d.Image(f)
 local g={
 Icon=f.Icon or nil,
 Type=f.Type,
-Colors=f.Colors or{(d.IconThemeTag or Color3.new(1,1,1)),Color3.new(1,1,1)},
-Transparency=f.Transparency or{0,0},
+Colors=f.Colors or {(d.IconThemeTag or Color3.new(1,1,1)),Color3.new(1,1,1)},
+Transparency=f.Transparency or {0,0},
 Size=f.Size or UDim2.new(0,24,0,24),
 IconFrame=nil,
 }
 local h={}
 local i={}
-for j,l in pairsg.Colors do
+for j,l in pairs(g.Colors) do
 h[j]={
 ThemeTag=typeof(l)=="string"and l,
 Color=typeof(l)=="Color3"and l,
 }
 end
-for j,l in pairsg.Transparency do
+for j,l in pairs(g.Transparency) do
 i[j]={
 ThemeTag=typeof(l)=="string"and l,
 Value=typeof(l)=="number"and l,
@@ -335,7 +336,7 @@ ImageRectSize=l and nil or j[2].ImageRectSize,
 ImageRectOffset=l and nil or j[2].ImageRectPosition,
 })
 if not l and j[2].Parts then
-for r,u in pairsj[2].Parts do
+for r,u in pairs(j[2].Parts) do
 local v=d.Icon(u,g.Type)
 m("ImageLabel",{
 Size=UDim2.new(1,0,1,0),
@@ -363,9 +364,9 @@ m.Image=l and j or j[1]
 m.ImageRectSize=l and nil or j[2].ImageRectSize
 m.ImageRectOffset=l and nil or j[2].ImageRectPosition
 if not l and j[2].Parts then
-for p,r in pairsj[2].Parts do
+for p,r in pairs(j[2].Parts) do
 local u=d.Icon(r,g.Type)
-local v=Instance.New"ImageLabel"v.Size=UDim2.new(1,0,1,0)
+local v=Instance.new"ImageLabel"v.Size=UDim2.new(1,0,1,0)
 v.BackgroundTransparency=1
 v.ImageColor3=h[1+p].Color
 v.ImageTransparency=i[1+p].Value or nil
@@ -590,7 +591,7 @@ table.insert(r.Signals,x)
 return x
 end
 function r.DisconnectAll()
-for u,v in pairsr.Signals do
+for u,v in pairs(r.Signals) do
 local x=table.remove(r.Signals,u)
 x:Disconnect()
 end
@@ -617,7 +618,7 @@ return p:Gradient(u,v)
 end
 local x={}
 local z={}
-for A,B in pairsu do
+for A,B in pairs(u) do
 local C=tonumber(A)
 if C then
 C=math.clamp(C/100,0,1)
@@ -648,7 +649,7 @@ function r.SetTheme(u)
 local v=r.Theme
 r.Theme=u
 r.UpdateTheme(nil,false)
-for x,z in pairsr.ThemeChangeCallbacks do
+for x,z in pairs(r.ThemeChangeCallbacks) do
 r.SafeCallback(z,u,v)
 end
 end
@@ -658,7 +659,7 @@ r.UpdateFont(r.Font)
 end
 function r.UpdateFont(u)
 r.Font=u
-for v,x in pairsr.FontObjects do
+for v,x in pairs(r.FontObjects) do
 x.FontFace=Font.new(u,x.FontFace.Weight,x.FontFace.Style)
 end
 end
@@ -748,7 +749,7 @@ return x
 end
 function r.UpdateTheme(u,v,x,z,A,B)
 local function ApplyTheme(C)
-for F,G in pairs(C.Properties or{})do
+for F,G in pairs(C.Properties or {})do
 local H=r.GetThemeProperty(G,r.Theme)
 if H~=nil then
 if typeof(H)=="Color3"then
@@ -884,10 +885,10 @@ return m.AddIcons(u,v)
 end
 function r.New(u,v,x)
 local z=Instance.new(u)
-for A,B in pairsr.DefaultProperties[u]or{}do
+for A,B in pairs(r.DefaultProperties[u] or {}) do
 z[A]=B
 end
-for A,B in pairsv or{}do
+for A,B in pairs(v or {}) do
 if A~="ThemeTag"then
 z[A]=B
 end
@@ -900,7 +901,7 @@ r.SetLangForObject(F)
 end
 end
 end
-for A,B in pairsx or{}do
+for A,B in pairs(x or {}) do
 B.Parent=z
 end
 if v and v.ThemeTag then
@@ -1055,7 +1056,7 @@ and r.Request{
 Url=x,
 Method="GET",
 }.Body
-or{}
+or {}
 if not d:IsStudio()and writefile then
 writefile(L,M)
 end
@@ -1183,7 +1184,7 @@ local b={}
 function b.New(d,e,f)
 local g={
 Enabled=e.Enabled or false,
-Translations=e.Translations or{},
+Translations=e.Translations or {},
 Prefix=e.Prefix or"loc:",
 DefaultLanguage=e.DefaultLanguage or"en"}
 f.Localization=g
@@ -1237,7 +1238,7 @@ IconThemed=g.IconThemed,
 Background=g.Background,
 BackgroundImageTransparency=g.BackgroundImageTransparency,
 Duration=g.Duration or 5,
-Buttons=g.Buttons or{},
+Buttons=g.Buttons or {},
 CanClose=g.CanClose~=false,
 UIElements={},
 Closed=false,
@@ -1436,7 +1437,7 @@ end
 return h
 end
 return f end function a.g()
-local b=4294967296;local d=b-1;local function c(e,f)local g,h=0,1;while e~=0 or f~=0 do local i,l=e%2,f%2;local m=(i+l)%2;g=g+m*h;e=math.floor(e/2)f=math.floor(f/2)h=h*2 end;return g%b end;local function k(e,f,g,...)local h;if f then e=e%b;f=f%b;h=c(e,f)if g then h=k(h,g,...)end;return h elseif e then return e%b else return 0 end end;local function n(e,f,g,...)local h;if f then e=e%b;f=f%b;h=(e+f-c(e,f))/2;if g then h=n(h,g,...)end;return h elseif e then return e%b else return d end end;local function o(e)return d-e end;local function q(e,f)if f<0 then return lshift(e,-f)end;return math.floor(e%4294967296/2^f)end;local function s(e,f)if f>31 or f<-31 then return 0 end;return q(e%b,f)end;local function lshift(e,f)if f<0 then return s(e,-f)end;return e*2^f%4294967296 end;local function t(e,f)e=e%b;f=f%32;local g=n(e,2^f-1)return s(e,f)+lshift(g,32-f)end;local e={0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2}local function w(f)return string.gsub(f,".",function(g)return string.format("%02x",string.byte(g))end)end;local function y(f,g)local h=""for i=1,g do local l=f%256;h=string.char(l)..h;f=(f-l)/256 end;return h end;local function D(f,g)local h=0;for i=g,g+3 do h=h*256+string.byte(f,i)end;return h end;local function E(f,g)local h=64-(g+9)%64;g=y(8*g,8)f=f.."\128"..string.rep("\0",h)..g;assert(#f%64==0)return f end;local function I(f)f[1]=0x6a09e667;f[2]=0xbb67ae85;f[3]=0x3c6ef372;f[4]=0xa54ff53a;f[5]=0x510e527f;f[6]=0x9b05688c;f[7]=0x1f83d9ab;f[8]=0x5be0cd19;return f end;local function K(f,g,h)local i={}for l=1,16 do i[l]=D(f,g+(l-1)*4)end;for l=17,64 do local m=i[l-15]local p=k(t(m,7),t(m,18),s(m,3))m=i[l-2]i[l]=(i[l-16]+p+i[l-7]+k(t(m,17),t(m,19),s(m,10)))%b end;local l,m,p,r,u,v,x,z=h[1],h[2],h[3],h[4],h[5],h[6],h[7],h[8]for A=1,64 do local B=k(t(l,2),t(l,13),t(l,22))local C=k(n(l,m),n(l,p),n(m,p))local F=(B+C)%b;local G=k(t(u,6),t(u,11),t(u,25))local H=k(n(u,v),n(o(u),x))local J=(z+G+H+e[A]+i[A])%b;z=x;x=v;v=u;u=(r+J)%b;r=p;p=m;m=l;l=(J+F)%b end;h[1]=(h[1]+l)%b;h[2]=(h[2]+m)%b;h[3]=(h[3]+p)%b;h[4]=(h[4]+r)%b;h[5]=(h[5]+u)%b;h[6]=(h[6]+v)%b;h[7]=(h[7]+x)%b;h[8]=(h[8]+z)%b end;local function Z(f)f=E(f,#f)local g=I{}for h=1,#f,64 do K(f,h,g)end;return w(y(g[1],4)..y(g[2],4)..y(g[3],4)..y(g[4],4)..y(g[5],4)..y(g[6],4)..y(g[7],4)..y(g[8],4))end;local f;local g={["\\"]="\\",["\""]="\"",["\b"]="b",["\f"]="f",["\n"]="n",["\r"]="r",["\t"]="t"}local h={["/"]="/"}for i,l in pairs(g)do h[l]=i end;local i=function(i)return"\\"..(g[i]or string.format("u%04x",i:byte()))end;local l=function(l)return"null"end;local m=function(m,p)local r={}p=p or{}if p[m]then error"circular reference"end;p[m]=true;if rawget(m,1)~=nil or next(m)==nil then local u=0;for v in pairs(m)do if type(v)~="number"then error"invalid table: mixed or invalid key types"end;u=u+1 end;if u~=#m then error"invalid table: sparse array"end;for v,x in ipairs(m)do table.insert(r,f(x,p))end;p[m]=nil;return"["..table.concat(r,",").."]"else for u,v in pairs(m)do if type(u)~="string"then error"invalid table: mixed or invalid key types"end;table.insert(r,f(u,p)..":"..f(v,p))end;p[m]=nil;return"{"..table.concat(r,",").."}"end end;local p=function(p)return'"'..p:gsub('[%z\1-\31\\"]',i)..'"'end;local r=function(r)if r~=r or r<=-math.huge or r>=math.huge then error("unexpected number value '"..tostring(r).."'")end;return string.format("%.14g",r)end;local u={["nil"]=l,table=m,string=p,number=r,boolean=tostring}f=function(v,x)local z=type(v)local A=u[z]if A then return A(v,x)end;error("unexpected type '"..z.."'")end;local v=function(v)return f(v)end;local x;local z=function(...)local z={}for A=1,select("#",...)do z[select(A,...)]=true end;return z end;local A=z(" ","\t","\r","\n")local B=z(" ","\t","\r","\n","]","}",",")local C=z("\\","/",'"',"b","f","n","r","t","u")local F=z("true","false","null")local G={["true"]=true,["false"]=false,null=nil}local H=function(H,J,L,M)for N=J,#H do if L[H:sub(N,N)]~=M then return N end end;return#H+1 end;local J=function(J,L,M)local N=1;local O=1;for P=1,L-1 do O=O+1;if J:sub(P,P)=="\n"then N=N+1;O=1 end end;error(string.format("%s at line %d col %d",M,N,O))end;local L=function(L)local M=math.floor;if L<=0x7f then return string.char(L)elseif L<=0x7ff then return string.char(M(L/64)+192,L%64+128)elseif L<=0xffff then return string.char(M(L/4096)+224,M(L%4096/64)+128,L%64+128)elseif L<=0x10ffff then return string.char(M(L/262144)+240,M(L%262144/4096)+128,M(L%4096/64)+128,L%64+128)end;error(string.format("invalid unicode codepoint '%x'",L))end;local M=function(M)local N=tonumber(M:sub(1,4),16)local O=tonumber(M:sub(7,10),16)if O then return L((N-0xd800)*0x400+O-0xdc00+0x10000)else return L(N)end end;local N=function(N,O)local P=""local Q=O+1;local R=Q;while Q<=#N do local S=N:byte(Q)if S<32 then J(N,Q,"control character in string")elseif S==92 then P=P..N:sub(R,Q-1)Q=Q+1;local T=N:sub(Q,Q)if T=="u"then local U=N:match("^[dD][89aAbB]%x%x\\u%x%x%x%x",Q+1)or N:match("^%x%x%x%x",Q+1)or J(N,Q-1,"invalid unicode escape in string")P=P..M(U)Q=Q+#U else if not C[T]then J(N,Q-1,"invalid escape char '"..T.."' in string")end;P=P..h[T]end;R=Q+1 elseif S==34 then P=P..N:sub(R,Q-1)return P,Q+1 end;Q=Q+1 end;J(N,O,"expected closing quote for string")end;local O=function(O,P)local Q=H(O,P,B)local R=O:sub(P,Q-1)local S=tonumber(R)if not S then J(O,P,"invalid number '"..R.."'")end;return S,Q end;local P=function(P,Q)local R=H(P,Q,B)local S=P:sub(Q,R-1)if not F[S]then J(P,Q,"invalid literal '"..S.."'")end;return G[S],R end;local Q=function(Q,R)local S={}local T=1;R=R+1;while 1 do local U;R=H(Q,R,A,true)if Q:sub(R,R)=="]"then R=R+1;break end;U,R=x(Q,R)S[T]=U;T=T+1;R=H(Q,R,A,true)local V=Q:sub(R,R)R=R+1;if V=="]"then break end;if V~=","then J(Q,R,"expected ']' or ','")end end;return S,R end;local R=function(R,S)local T={}S=S+1;while 1 do local U,V;S=H(R,S,A,true)if R:sub(S,S)=="}"then S=S+1;break end;if R:sub(S,S)~='"'then J(R,S,"expected string for key")end;U,S=x(R,S)S=H(R,S,A,true)if R:sub(S,S)~=":"then J(R,S,"expected ':' after key")end;S=H(R,S+1,A,true)V,S=x(R,S)T[U]=V;S=H(R,S,A,true)local W=R:sub(S,S)S=S+1;if W=="}"then break end;if W~=","then J(R,S,"expected '}' or ','")end end;return T,S end;local S={['"']=N,["0"]=O,["1"]=O,["2"]=O,["3"]=O,["4"]=O,["5"]=O,["6"]=O,["7"]=O,["8"]=O,["9"]=O,["-"]=O,t=P,f=P,n=P,["["]=Q,["{"]=R}x=function(T,U)local V=T:sub(U,U)local W=S[V]if W then return W(T,U)end;J(T,U,"unexpected character '"..V.."'")end;local T=function(T)if type(T)~="string"then error("expected argument of type string, got "..type(T))end;local U,V=x(T,H(T,1,A,true))V=H(T,V,A,true)if V<=#T then J(T,V,"trailing garbage")end;return U end;
+local b=4294967296;local d=b-1;local function c(e,f)local g,h=0,1;while e~=0 or f~=0 do local i,l=e%2,f%2;local m=(i+l)%2;g=g+m*h;e=math.floor(e/2)f=math.floor(f/2)h=h*2 end;return g%b end;local function k(e,f,g,...)local h;if f then e=e%b;f=f%b;h=c(e,f)if g then h=k(h,g,...)end;return h elseif e then return e%b else return 0 end end;local function n(e,f,g,...)local h;if f then e=e%b;f=f%b;h=(e+f-c(e,f))/2;if g then h=n(h,g,...)end;return h elseif e then return e%b else return d end end;local function o(e)return d-e end;local function q(e,f)if f<0 then return lshift(e,-f)end;return math.floor(e%4294967296/2^f)end;local function s(e,f)if f>31 or f<-31 then return 0 end;return q(e%b,f)end;local function lshift(e,f)if f<0 then return s(e,-f)end;return e*2^f%4294967296 end;local function t(e,f)e=e%b;f=f%32;local g=n(e,2^f-1)return s(e,f)+lshift(g,32-f)end;local e={0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2}local function w(f)return string.gsub(f,".",function(g)return string.format("%02x",string.byte(g))end)end;local function y(f,g)local h=""for i=1,g do local l=f%256;h=string.char(l)..h;f=(f-l)/256 end;return h end;local function D(f,g)local h=0;for i=g,g+3 do h=h*256+string.byte(f,i)end;return h end;local function E(f,g)local h=64-(g+9)%64;g=y(8*g,8)f=f.."\128"..string.rep("\0",h)..g;assert(#f%64==0)return f end;local function I(f)f[1]=0x6a09e667;f[2]=0xbb67ae85;f[3]=0x3c6ef372;f[4]=0xa54ff53a;f[5]=0x510e527f;f[6]=0x9b05688c;f[7]=0x1f83d9ab;f[8]=0x5be0cd19;return f end;local function K(f,g,h)local i={}for l=1,16 do i[l]=D(f,g+(l-1)*4)end;for l=17,64 do local m=i[l-15]local p=k(t(m,7),t(m,18),s(m,3))m=i[l-2]i[l]=(i[l-16]+p+i[l-7]+k(t(m,17),t(m,19),s(m,10)))%b end;local l,m,p,r,u,v,x,z=h[1],h[2],h[3],h[4],h[5],h[6],h[7],h[8]for A=1,64 do local B=k(t(l,2),t(l,13),t(l,22))local C=k(n(l,m),n(l,p),n(m,p))local F=(B+C)%b;local G=k(t(u,6),t(u,11),t(u,25))local H=k(n(u,v),n(o(u),x))local J=(z+G+H+e[A]+i[A])%b;z=x;x=v;v=u;u=(r+J)%b;r=p;p=m;m=l;l=(J+F)%b end;h[1]=(h[1]+l)%b;h[2]=(h[2]+m)%b;h[3]=(h[3]+p)%b;h[4]=(h[4]+r)%b;h[5]=(h[5]+u)%b;h[6]=(h[6]+v)%b;h[7]=(h[7]+x)%b;h[8]=(h[8]+z)%b end;local function Z(f)f=E(f,#f)local g=I{}for h=1,#f,64 do K(f,h,g)end;return w(y(g[1],4)..y(g[2],4)..y(g[3],4)..y(g[4],4)..y(g[5],4)..y(g[6],4)..y(g[7],4)..y(g[8],4))end;local f;local g={["\\"]="\\",["\""]="\"",["\b"]="b",["\f"]="f",["\n"]="n",["\r"]="r",["\t"]="t"}local h={["/"]="/"}for i,l in pairs(g)do h[l]=i end;local i=function(i)return"\\"..(g[i]or string.format("u%04x",i:byte()))end;local l=function(l)return"null"end;local m=function(m,p)local r={}p=p or {}if p[m]then error"circular reference"end;p[m]=true;if rawget(m,1)~=nil or next(m)==nil then local u=0;for v in pairs(m)do if type(v)~="number"then error"invalid table: mixed or invalid key types"end;u=u+1 end;if u~=#m then error"invalid table: sparse array"end;for v,x in ipairs(m)do table.insert(r,f(x,p))end;p[m]=nil;return"["..table.concat(r,",").."]"else for u,v in pairs(m)do if type(u)~="string"then error"invalid table: mixed or invalid key types"end;table.insert(r,f(u,p)..":"..f(v,p))end;p[m]=nil;return"{"..table.concat(r,",").."}"end end;local p=function(p)return'"'..p:gsub('[%z\1-\31\\"]',i)..'"'end;local r=function(r)if r~=r or r<=-math.huge or r>=math.huge then error("unexpected number value '"..tostring(r).."'")end;return string.format("%.14g",r)end;local u={["nil"]=l,table=m,string=p,number=r,boolean=tostring}f=function(v,x)local z=type(v)local A=u[z]if A then return A(v,x)end;error("unexpected type '"..z.."'")end;local v=function(v)return f(v)end;local x;local z=function(...)local z={}for A=1,select("#",...)do z[select(A,...)]=true end;return z end;local A=z(" ","\t","\r","\n")local B=z(" ","\t","\r","\n","]","}",",")local C=z("\\","/",'"',"b","f","n","r","t","u")local F=z("true","false","null")local G={["true"]=true,["false"]=false,null=nil}local H=function(H,J,L,M)for N=J,#H do if L[H:sub(N,N)]~=M then return N end end;return#H+1 end;local J=function(J,L,M)local N=1;local O=1;for P=1,L-1 do O=O+1;if J:sub(P,P)=="\n"then N=N+1;O=1 end end;error(string.format("%s at line %d col %d",M,N,O))end;local L=function(L)local M=math.floor;if L<=0x7f then return string.char(L)elseif L<=0x7ff then return string.char(M(L/64)+192,L%64+128)elseif L<=0xffff then return string.char(M(L/4096)+224,M(L%4096/64)+128,L%64+128)elseif L<=0x10ffff then return string.char(M(L/262144)+240,M(L%262144/4096)+128,M(L%4096/64)+128,L%64+128)end;error(string.format("invalid unicode codepoint '%x'",L))end;local M=function(M)local N=tonumber(M:sub(1,4),16)local O=tonumber(M:sub(7,10),16)if O then return L((N-0xd800)*0x400+O-0xdc00+0x10000)else return L(N)end end;local N=function(N,O)local P=""local Q=O+1;local R=Q;while Q<=#N do local S=N:byte(Q)if S<32 then J(N,Q,"control character in string")elseif S==92 then P=P..N:sub(R,Q-1)Q=Q+1;local T=N:sub(Q,Q)if T=="u"then local U=N:match("^[dD][89aAbB]%x%x\\u%x%x%x%x",Q+1)or N:match("^%x%x%x%x",Q+1)or J(N,Q-1,"invalid unicode escape in string")P=P..M(U)Q=Q+#U else if not C[T]then J(N,Q-1,"invalid escape char '"..T.."' in string")end;P=P..h[T]end;R=Q+1 elseif S==34 then P=P..N:sub(R,Q-1)return P,Q+1 end;Q=Q+1 end;J(N,O,"expected closing quote for string")end;local O=function(O,P)local Q=H(O,P,B)local R=O:sub(P,Q-1)local S=tonumber(R)if not S then J(O,P,"invalid number '"..R.."'")end;return S,Q end;local P=function(P,Q)local R=H(P,Q,B)local S=P:sub(Q,R-1)if not F[S]then J(P,Q,"invalid literal '"..S.."'")end;return G[S],R end;local Q=function(Q,R)local S={}local T=1;R=R+1;while 1 do local U;R=H(Q,R,A,true)if Q:sub(R,R)=="]"then R=R+1;break end;U,R=x(Q,R)S[T]=U;T=T+1;R=H(Q,R,A,true)local V=Q:sub(R,R)R=R+1;if V=="]"then break end;if V~=","then J(Q,R,"expected ']' or ','")end end;return S,R end;local R=function(R,S)local T={}S=S+1;while 1 do local U,V;S=H(R,S,A,true)if R:sub(S,S)=="}"then S=S+1;break end;if R:sub(S,S)~='"'then J(R,S,"expected string for key")end;U,S=x(R,S)S=H(R,S,A,true)if R:sub(S,S)~=":"then J(R,S,"expected ':' after key")end;S=H(R,S+1,A,true)V,S=x(R,S)T[U]=V;S=H(R,S,A,true)local W=R:sub(S,S)S=S+1;if W=="}"then break end;if W~=","then J(R,S,"expected '}' or ','")end end;return T,S end;local S={['"']=N,["0"]=O,["1"]=O,["2"]=O,["3"]=O,["4"]=O,["5"]=O,["6"]=O,["7"]=O,["8"]=O,["9"]=O,["-"]=O,t=P,f=P,n=P,["["]=Q,["{"]=R}x=function(T,U)local V=T:sub(U,U)local W=S[V]if W then return W(T,U)end;J(T,U,"unexpected character '"..V.."'")end;local T=function(T)if type(T)~="string"then error("expected argument of type string, got "..type(T))end;local U,V=x(T,H(T,1,A,true))V=H(T,V,A,true)if V<=#T then J(T,V,"trailing garbage")end;return U end;
 local U,V,W=v,T,Z;
 local X={}
 local Y=(cloneref or clonereference or function(Y)return Y end)
@@ -2412,11 +2413,11 @@ PaddingRight=UDim.new(0,10),
 PaddingBottom=UDim.new(0,10),
 }),
 })
-for i,l in pairsag.KeySystem.API do
+for i,l in pairs(ag.KeySystem.API) do
 local m=ag.WindUI.Services[l.Type]
 if m then
 local p={}
-for r,u in pairsm.Args do
+for r,u in pairs(m.Args) do
 table.insert(p,l[u])
 end
 local r=m.New(table.unpack(p))
@@ -2564,7 +2565,7 @@ end
 end
 else
 local b,d
-for f,g in pairsam do
+for f,g in pairs(am) do
 local h,i=g.Verify(aA)
 if h then
 b,d=true,i
@@ -2972,7 +2973,7 @@ PaddingBottom=UDim.new(0,16),
 }),
 })
 local as=a.load'm'.New
-for at,au in pairsag.Buttons do
+for at,au in pairs(ag.Buttons) do
 as(au.Title,au.Icon,au.Callback,au.Variant,aq,ai)
 end
 ai:Open()
@@ -3517,7 +3518,7 @@ ah.Color
 })
 local ak
 if typeof(ah.Color)=="table"then
-ak=ac"UIGradient"for al,am in pairsah.Color do
+ak=ac"UIGradient"for al,am in pairs(ah.Color) do
 ak[al]=am
 end
 aj.TextColor3=ab.GetTextColorForHSB(ab.GetAverageColor(ak))
@@ -3576,7 +3577,7 @@ if typeof(an)=="table"then
 local ao=ab.GetAverageColor(an)
 ad(aj,0.06,{TextColor3=ab.GetTextColorForHSB(ao)}):Play()
 local ap=al:FindFirstChildOfClass"UIGradient"or ac("UIGradient",{Parent=al})
-for aq,ar in pairsan do
+for aq,ar in pairs(an) do
 ap[aq]=ar
 end
 ad(al,0.06,{ImageColor3=Color3.new(1,1,1)}):Play()
@@ -3727,7 +3728,7 @@ ae.Path="WindUI/"..tostring(ae.Folder).."/config/"if not isfolder(ae.Path)then
 makefolder(ae.Path)
 end
 local ah=ae:AllConfigs()
-for ai,aj in pairsah do
+for ai,aj in pairs(ah) do
 if isfile and readfile and isfile(aj..".json")then
 ae.Configs[aj]=readfile(aj..".json")
 end
@@ -3773,7 +3774,7 @@ ai.AutoLoad=ak
 end
 function ai.Save(aj)
 if ad.PendingFlags then
-for ak,al in pairsad.PendingFlags do
+for ak,al in pairs(ad.PendingFlags) do
 ai:Register(ak,al)
 end
 end
@@ -3783,7 +3784,7 @@ __elements={},
 __autoload=ai.AutoLoad,
 __custom=ai.CustomData
 }
-for al,am in pairsai.Elements do
+for al,am in pairs(ai.Elements) do
 if ae.Parser[am.__type]then
 ak.__elements[tostring(al)]=ae.Parser[am.__type].Save(am)
 end
@@ -3814,18 +3815,18 @@ __custom={}
 al=am
 end
 if ad.PendingFlags then
-for am,an in pairsad.PendingFlags do
+for am,an in pairs(ad.PendingFlags) do
 ai:Register(am,an)
 end
 end
-for am,an in pairs(al.__elements or{})do
+for am,an in pairs(al.__elements or {})do
 if ai.Elements[am]and ae.Parser[an.__type]then
 task.spawn(function()
 ae.Parser[an.__type].Load(ai.Elements[am],an)
 end)
 end
 end
-ai.CustomData=al.__custom or{}
+ai.CustomData=al.__custom or {}
 return ai.CustomData
 end
 function ai.Delete(aj)
@@ -3909,7 +3910,7 @@ if not isfolder(ae.Path)then
 makefolder(ae.Path)
 return ag
 end
-for ah,ai in pairslistfiles(ae.Path)do
+for ah,ai in pairs(listfiles(ae.Path)) do
 local aj=ai:match"([^\\/]+)%.json$"if aj then
 table.insert(ag,aj)
 end
@@ -4365,7 +4366,7 @@ Justify=ag.Justify or"Between",
 UIPadding=ag.Window.ElementConfig.UIPadding,
 UICorner=ag.Window.ElementConfig.UICorner,
 Size=ag.Size or"Default",
-Tags=ag.Tags or{},
+Tags=ag.Tags or {},
 UIElements={},
 Index=ag.Index,
 }
@@ -4522,7 +4523,7 @@ ar,
 }),
 }),
 })
-for as,at in pairsag.Tags or{}do
+for as,at in pairs(ag.Tags or {}) do
 if not ah.UIElements.Container.TitleFrame.TitleFrame.ScrollingFrame.Visible then
 ah.UIElements.Container.TitleFrame.TitleFrame.ScrollingFrame.Visible=true
 ah.UIElements.Container.TitleFrame.TitleFrame.Space.Visible=true
@@ -4946,7 +4947,7 @@ Padding=UDim.new(0,10),
 FillDirection="Vertical",
 }),
 })
-for aj,ak in pairsaf.Buttons do
+for aj,ak in pairs(af.Buttons) do
 local al=ad(
 ak.Title,
 ak.Icon,
@@ -5593,7 +5594,7 @@ Title=ak.Title or nil,
 Desc=ak.Desc or nil,
 Locked=ak.Locked or nil,
 LockedTitle=ak.LockedTitle,
-Value=ak.Value or{},
+Value=ak.Value or {},
 Icons=ak.Icons or nil,
 IsTooltip=ak.IsTooltip or false,
 IsTextbox=ak.IsTextbox,
@@ -5978,12 +5979,12 @@ LockedTitle=aj.LockedTitle,
 Value=NormalizeKeyCode(aj.Value)or"F",
 Callback=aj.Callback or function()end,
 CanChange=aj.CanChange~=false,
-Blacklist=aj.Blacklist or{},
+Blacklist=aj.Blacklist or {},
 Picking=false,
 UIElements={},
 }
 local al={}
-for am,an in pairsak.Blacklist do
+for am,an in pairs(ak.Blacklist) do
 table.insert(al,Enum.KeyCode[NormalizeKeyCode(an)])
 end
 table.insert(al,Enum.KeyCode[NormalizeKeyCode"Escape"])
@@ -6378,11 +6379,11 @@ function at.LockValues(av,aw)
 if not aw then
 return
 end
-for ax,ay in pairsap.Tabs do
+for ax,ay in pairs(ap.Tabs) do
 if ay and ay.UIElements and ay.UIElements.TabItem then
 local az=ay.Name
 local aA=false
-for aB,b in pairsaw do
+for aB,b in pairs(aw) do
 if az==b then
 aA=true
 break
@@ -6428,7 +6429,7 @@ function at.Refresh(av,aw)
 if ao.Window.Destroyed then
 return
 end
-for ax,ay in pairsap.UIElements.Menu.Frame.ScrollingFrame:GetChildren()do
+for ax,ay in pairs(ap.UIElements.Menu.Frame.ScrollingFrame:GetChildren()) do
 if not ay:IsA"UIListLayout"then
 ay:Destroy()
 end
@@ -6437,7 +6438,7 @@ ap.Tabs={}
 if ap.SearchBarEnabled then
 if not au then
 au=aj("Search...","search",ap.UIElements.Menu,nil,function(ax)
-for ay,az in pairsap.Tabs do
+for ay,az in pairs(ap.Tabs) do
 if string.find(string.lower(az.Name),string.lower(ax),1,true)then
 az.UIElements.TabItem.Visible=true
 else
@@ -6451,7 +6452,7 @@ au.Size=UDim2.new(1,0,0,aq.SearchBarHeight)
 au.Position=UDim2.new(0,0,0,0)
 au.Name="SearchBar"end
 end
-for ax,ay in pairsaw do
+for ax,ay in pairs(aw) do
 if ay.Type~="Divider"then
 local az={
 Name=typeof(ay)=="table"and ay.Title or ay,
@@ -6567,7 +6568,7 @@ az.UIElements.TabIcon.ImageLabel.ImageTransparency=0.6
 end
 end
 if ap.Multi and typeof(ap.Value)=="string"then
-for aB,b in pairsap.Values do
+for aB,b in pairs(ap.Values) do
 if typeof(b)=="table"then
 if b.Title==ap.Value then
 ap.Value={b}
@@ -6632,7 +6633,7 @@ am(az.UIElements.TabItem.Frame.Title.TextLabel,0.1,{TextTransparency=0.4}):Play(
 if az.UIElements.TabIcon then
 am(az.UIElements.TabIcon.ImageLabel,0.1,{ImageTransparency=0.2}):Play()
 end
-for aB,b in pairsap.Value do
+for aB,b in pairs(ap.Value) do
 if typeof(b)=="table"and(b.Title==az.Name)or(b==az.Name)then
 table.remove(ap.Value,aB)
 break
@@ -6640,7 +6641,7 @@ end
 end
 end
 else
-for aB,b in pairsap.Tabs do
+for aB,b in pairs(ap.Tabs) do
 am(b.UIElements.TabItem,0.1,{ImageTransparency=1}):Play()
 am(
 b.UIElements.TabItem.Frame.Title.TextLabel,
@@ -6806,7 +6807,7 @@ Title=ao.Title or"Dropdown",
 Desc=ao.Desc or nil,
 Locked=ao.Locked or false,
 LockedTitle=ao.LockedTitle,
-Values=ao.Values or{},
+Values=ao.Values or {},
 MenuWidth=ao.MenuWidth or 180,
 Value=ao.Value,
 AllowNone=ao.AllowNone,
@@ -7558,7 +7559,7 @@ ay(Color3.fromHSV(az.Hue,az.Sat,az.Vib),az.Transparency)
 end,
 },
 }
-for G,H in pairsF do
+for G,H in pairs(F) do
 local J=aq(
 H.Title,
 H.Icon,
@@ -8112,7 +8113,7 @@ end
 as.Text=aw
 end
 function an.Destroy(av)
-for aw,ax in pairsan.Elements do
+for aw,ax in pairs(an.Elements) do
 ax:Destroy()
 end
 at:Destroy()
@@ -8302,7 +8303,7 @@ function(ap,aq)
 local ar=al.Tab and al.Tab.Gap or(al.Window.NewElements and 1 or 6)
 local as={}
 local at=0
-for au,av in pairsaq do
+for au,av in pairs(aq) do
 if av.__type=="Space"then
 at=at+(av.ElementFrame.Size.X.Offset or 6)
 elseif av.__type=="Divider"then
@@ -8318,7 +8319,7 @@ local aw=ar*(au-1)
 local ax=-(aw+at)
 local ay=math.floor(ax/au)
 local az=ax-(ay*au)
-for aA,aB in pairsas do
+for aA,aB in pairs(as) do
 local b=ay
 if aA<=math.abs(az)then
 b=b-1
@@ -8368,7 +8369,7 @@ function(ap,aq)
 local ar=al.Tab and al.Tab.Gap or(al.Window.NewElements and 1 or 6)
 local as={}
 local at=0
-for au,av in pairsaq do
+for au,av in pairs(aq) do
 if av.__type=="Space"then
 at=at+(av.ElementFrame.Size.X.Offset or 6)
 elseif av.__type=="Divider"then
@@ -8386,7 +8387,7 @@ local aw=ar*(au-1)
 local ax=-(aw+at)
 local ay=math.floor(ax/au)
 local az=ax-(ay*au)
-for aA,aB in pairsas do
+for aA,aB in pairs(as) do
 local b=ay
 if aA<=math.abs(az)then
 b=b-1
@@ -8401,7 +8402,7 @@ al.UIScale,
 al.Tab
 )
 if am.AutoSpace then
-for ap in pairsao.Elements do
+for ap in pairs(ao.Elements) do
 if ap~="Space"and ap~="Divider"then
 local aq=am[ap]
 am[ap]=function(ar,as)
@@ -8646,9 +8647,9 @@ VStack=a.load'X',
 Viewport=a.load'Y',
 },
 Load=function(aa,af,ai,ak,al,am,an,ao,ap)
-for aq,ar in pairsai do
+for aq,ar in pairs(ai) do
 aa[aq]=function(as,at)
-at=at or{}
+at=at or {}
 at.Tab=ap or aa
 at.ParentType=aa.__type
 at.ParentTable=aa
@@ -8682,12 +8683,12 @@ end)
 end
 end
 else
-ak.PendingFlags=ak.PendingFlags or{}
+ak.PendingFlags=ak.PendingFlags or {}
 ak.PendingFlags[at.Flag]=av
 end
 end
 local aw
-for ax,ay in pairsav do
+for ax,ay in pairs(av) do
 if typeof(ay)=="table"and ax~="ElementFrame"and ax:match"Frame$"then
 aw=ay
 break
@@ -8733,7 +8734,7 @@ return av
 end
 end
 function aa.UpdateAllElementShapes(aq,ar)
-for as,at in pairsar.Elements do
+for as,at in pairs(ar.Elements) do
 local au
 for av,aw in pairs(at)do
 if typeof(aw)=="table"and av:match"Frame$"then
@@ -8788,7 +8789,7 @@ Locked=ap.Locked,
 ShowTabTitle=ap.ShowTabTitle,
 TabTitleAlign=ap.TabTitleAlign or"Left",
 CustomEmptyPage=(ap.CustomEmptyPage and next(ap.CustomEmptyPage)~=nil)and ap.CustomEmptyPage
-or{Icon="lucide:frown",IconSize=48,Title="This tab is Empty",Desc=nil},
+or {Icon="lucide:frown",IconSize=48,Title="This tab is Empty",Desc=nil},
 Border=ap.Border,
 Selected=false,
 Index=nil,
@@ -9108,14 +9109,14 @@ aq,
 ar
 )
 function ar.LockAll(aB)
-for b,d in pairsWindow.AllElements do
+for b,d in pairs(Window.AllElements) do
 if d.Tab and d.Tab.Index and d.Tab.Index==ar.Index and d.Lock then
 d:Lock()
 end
 end
 end
 function ar.UnlockAll(aB)
-for b,d in pairsWindow.AllElements do
+for b,d in pairs(Window.AllElements) do
 if d.Tab and d.Tab.Index and d.Tab.Index==ar.Index and d.Unlock then
 d:Unlock()
 end
@@ -9123,7 +9124,7 @@ end
 end
 function ar.GetLocked(aB)
 local b={}
-for d,f in pairsWindow.AllElements do
+for d,f in pairs(Window.AllElements) do
 if f.Tab and f.Tab.Index and f.Tab.Index==ar.Index and f.Locked==true then
 table.insert(b,f)
 end
@@ -9132,7 +9133,7 @@ return b
 end
 function ar.GetUnlocked(aB)
 local b={}
-for d,f in pairsWindow.AllElements do
+for d,f in pairs(Window.AllElements) do
 if f.Tab and f.Tab.Index and f.Tab.Index==ar.Index and f.Locked==false then
 table.insert(b,f)
 end
@@ -9200,7 +9201,7 @@ end
 function ao.SelectTab(ap,aq)
 if not ao.Tabs[aq].Locked then
 ao.SelectedTab=aq
-for ar,as in pairsao.Tabs do
+for ar,as in pairs(ao.Tabs) do
 if not as.Locked then
 ak.SetThemeTag(as.UIElements.Main,{
 ImageTransparency="TabBorderTransparency",
@@ -9240,7 +9241,7 @@ ImageTransparency="TabIconTransparencyActive",
 end
 ao.Tabs[aq].Selected=true
 task.spawn(function()
-for ar,as in pairsao.Containers do
+for ar,as in pairs(ao.Containers) do
 as.AnchorPoint=Vector2.new(0,0.05)
 as.Visible=false
 end
@@ -9739,10 +9740,10 @@ if not av or av==""then
 return{}
 end
 local aw={}
-for ax,ay in pairsam.Tabs do
+for ax,ay in pairs(am.Tabs) do
 local az=ContainsText(ay.Title or"",av)
 local aA={}
-for aB,b in pairsay.Elements do
+for aB,b in pairs(ay.Elements) do
 if b.__type~="Section"then
 local d=ContainsText(b.Title or"",av)
 local f=ContainsText(b.Desc or"",av)
@@ -9809,20 +9810,20 @@ function ap.Search(av,aw)
 aw=aw or""local ax=Search(aw)
 as.Visible=true
 at.Frame.Results.Frame.Visible=true
-for ay,az in pairsas:GetChildren()do
+for ay,az in pairs(as:GetChildren()) do
 if az.ClassName~="UIListLayout"and az.ClassName~="UIPadding"then
 az:Destroy()
 end
 end
 if ax and next(ax)~=nil then
-for ay,az in pairsax do
+for ay,az in pairs(ax) do
 local aA=ap.Icons.Tab
 local aB=CreateSearchTab(az.Title,nil,aA,as,true,function()
 ap:Close()
 am:SelectTab(ay)
 end)
 if az.Elements and next(az.Elements)~=nil then
-for b,d in pairsaz.Elements do
+for b,d in pairs(az.Elements) do
 local f=ap.Icons[d.__type]
 CreateSearchTab(
 d.Title,
@@ -9892,9 +9893,9 @@ Resizable=av.Resizable~=false,
 Background=av.Background,
 BackgroundImageTransparency=av.BackgroundImageTransparency or 0,
 ShadowTransparency=av.ShadowTransparency or 0.6,
-User=av.User or{},
-Footer=av.Footer or{},
-Topbar=av.Topbar or{Height=52,ButtonsType="Default"},
+User=av.User or {},
+Footer=av.Footer or {},
+Topbar=av.Topbar or {Height=52,ButtonsType="Default"},
 Size=av.Size,
 MinSize=av.MinSize or Vector2.new(560,350),
 MaxSize=av.MaxSize or Vector2.new(850,560),
@@ -10762,7 +10763,7 @@ end
 end
 )
 if not h and aw.Background and typeof(aw.Background)=="table"then
-local A=ao"UIGradient"for B,C in pairsaw.Background do
+local A=ao"UIGradient"for B,C in pairs(aw.Background) do
 A[B]=C
 end
 aw.UIElements.BackgroundGradient=an.NewRoundFrame(aw.UICorner,"Squircle",{
@@ -11094,14 +11095,14 @@ av.WindUI.Transparent=F
 aw.UIElements.Main.Background.ImageTransparency=F and av.WindUI.TransparencyValue or 0
 end
 function aw.LockAll(C)
-for F,G in pairsaw.AllElements do
+for F,G in pairs(aw.AllElements) do
 if G.Lock then
 G:Lock()
 end
 end
 end
 function aw.UnlockAll(C)
-for F,G in pairsaw.AllElements do
+for F,G in pairs(aw.AllElements) do
 if G.Unlock then
 G:Unlock()
 end
@@ -11109,7 +11110,7 @@ end
 end
 function aw.GetLocked(C)
 local F={}
-for G,H in pairsaw.AllElements do
+for G,H in pairs(aw.AllElements) do
 if H.Locked then
 table.insert(F,H)
 end
@@ -11118,7 +11119,7 @@ return F
 end
 function aw.GetUnlocked(C)
 local F={}
-for G,H in pairsaw.AllElements do
+for G,H in pairs(aw.AllElements) do
 if H.Locked==false then
 table.insert(F,H)
 end
@@ -11220,7 +11221,7 @@ if typeof(J)=="boolean"then
 aw.HidePanelBackground=J
 aw.UIElements.MainBar.Background.Visible=J
 if G then
-for L,M in pairsG.Containers do
+for L,M in pairs(G.Containers) do
 M.ScrollingFrame.UIPadding.PaddingTop=UDim.new(0,aw.HidePanelBackground and 20 or 10)
 M.ScrollingFrame.UIPadding.PaddingLeft=
 UDim.new(0,aw.HidePanelBackground and 20 or 10)
@@ -11256,7 +11257,7 @@ local M={
 Title=L.Title or"Dialog",
 Width=L.Width or 320,
 Content=L.Content,
-Buttons=L.Buttons or{},
+Buttons=L.Buttons or {},
 TextPadding=14,
 }
 local N=H.Create(false,"Dialog",aw,av.WindUI,aw.UIElements.Main.Main)
@@ -11370,7 +11371,7 @@ LayoutOrder=4,
 R,
 })
 local T={}
-for U,V in pairsM.Buttons do
+for U,V in pairs(M.Buttons) do
 local W=
 ar(V.Title,V.Icon,V.Callback,V.Variant,S,N,true)
 table.insert(T,W)
@@ -11547,8 +11548,8 @@ aw.CanResize=false
 end)
 end
 function aw.DisableTopbarButtons(Q,R)
-for S,T in pairsR do
-for U,V in pairsaw.TopBarButtons do
+for S,T in pairs(R) do
+for U,V in pairs(aw.TopBarButtons) do
 if V.Name==T then
 V.Object.Visible=false
 end
@@ -11743,7 +11744,7 @@ end
 function aa.Gradient(az,aA,aB)
 local b={}
 local d={}
-for f,g in pairsaA do
+for f,g in pairs(aA) do
 local h=tonumber(f)
 if h then
 h=math.clamp(h/100,0,1)
@@ -11843,11 +11844,11 @@ else
 if isfile(h)then
 local i=readfile(h)
 local l=false
-for m,p in pairsaA.KeySystem.API do
+for m,p in pairs(aA.KeySystem.API) do
 local r=aa.Services[p.Type]
 if r then
 local u={}
-for v,x in pairsr.Args do
+for v,x in pairs(r.Args) do
 table.insert(u,p[x])
 end
 local v=r.New(table.unpack(u))
