@@ -1,4 +1,5 @@
 -- 1x
+print("loading")
 type ConfigType__DARKLUA_TYPE_a={
 Object:Instance,
 Camera:Instance?,
