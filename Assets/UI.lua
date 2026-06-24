@@ -1,5 +1,4 @@
--- 1x
-print("loading")
+--2x
 type ConfigType__DARKLUA_TYPE_a={
 Object:Instance,
 Camera:Instance?,
@@ -670,7 +669,7 @@ local A=z[x]
 if A==nil then
 return nil
 end
-if typeof(A)=="string"and A:byte(1)==35then
+if typeof(A)=="string"and A:byte(1)==35 then
 return Color3.fromHex(A)
 end
 if typeof(A)=="Color3"then
@@ -689,7 +688,7 @@ return A
 end
 local x=getValue(u,v)
 if x~=nil then
-if typeof(x)=="string"and x:byte(1)~=35then
+if typeof(x)=="string"and x:byte(1)~=35 then
 local z=r.GetThemeProperty(x,v)
 if z~=nil then
 return z
@@ -700,7 +699,7 @@ end
 end
 local z=r.ThemeFallbacks[u]
 if z~=nil then
-if typeof(z)=="string"and z:byte(1)~=35then
+if typeof(z)=="string"and z:byte(1)~=35 then
 return r.GetThemeProperty(z,v)
 else
 return getValue(u,{[u]=z})
@@ -708,7 +707,7 @@ end
 end
 x=getValue(u,r.Themes.Dark)
 if x~=nil then
-if typeof(x)=="string"and x:byte(1)~=35then
+if typeof(x)=="string"and x:byte(1)~=35 then
 local A=r.GetThemeProperty(x,r.Themes.Dark)
 if A~=nil then
 return A
@@ -718,7 +717,7 @@ return x
 end
 end
 if z~=nil then
-if typeof(z)=="string"and z:byte(1)~=35then
+if typeof(z)=="string"and z:byte(1)~=35 then
 return r.GetThemeProperty(z,r.Themes.Dark)
 else
 return getValue(u,{[u]=z})
@@ -1163,7 +1162,7 @@ A=Color3.fromHex(A)
 end
 return function(C)
 local F
-if typeof(z)=="string"and z:byte(1)~=35then
+if typeof(z)=="string"and z:byte(1)~=35 then
 F=r.GetThemeProperty(z,C)
 elseif typeof(z)=="string"then
 F=Color3.fromHex(z)
@@ -11750,7 +11749,7 @@ local h=tonumber(f)
 if h then
 h=math.clamp(h/100,0,1)
 local i=g.Color
-if typeof(i)=="string"and i:byte(1)==35then
+if typeof(i)=="string"and i:byte(1)==35 then
 i=Color3.fromHex(i)
 end
 local l=g.Transparency or 0
